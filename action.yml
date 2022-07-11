@@ -1,0 +1,23 @@
+name: 'license-compliance'
+description: 'Uses [license-compliance](https://www.npmjs.com/package/license-compliance) to check if open source packages you are using for production builds are using allowed licenses.'
+branding:
+  icon: 'thumbs-up'
+  color: 'green'
+inputs:
+  allow_licenses:
+    description: 'Either a semicolon separarated string of licenses (such as "MIT;ISC") or the URL to a location where this action can make a GET request to retrieve such a list.'
+    default: 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0'
+    required: false
+  nested_field:
+    description: 'If pointing the "licenses" input to an URL, use this to indicate whether the response will be in a single-level-nested object, such as under "allowedLicenses".'
+    default: ''
+    required: false
+  exclude_pattern:
+    description: 'An exclusion pattern, such as "/^@the-project/;some-package".'
+    default: ''
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/script.sh "${{ inputs.allow_licenses }}" "${{ inputs.nested_field }}" "${{ inputs.exclude_pattern }}"
+      shell: bash

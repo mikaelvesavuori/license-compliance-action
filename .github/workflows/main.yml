@@ -1,0 +1,15 @@
+on: [push]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      # Run private
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: License compliance check
+        uses: ./
+        with:
+          allow_licenses: 'https://www.mockachino.com/dba902ac-2531-41/licenses'
+          nested_field: 'licenseString'
+          exclude_pattern: ''
