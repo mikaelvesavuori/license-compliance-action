@@ -8,7 +8,7 @@ _Note that you will need to have a `package.json` file present for this action t
 
 ## Setup and usage
 
-There really is not that much to setup! However, if you want your toggles living somewhere else, you will need to provide a service that accepts `GET` requests. The response must not be deeper than one level (if it is nested, use `nested_field` explained below).
+There really is not that much to setup! However, if you want your licenses living somewhere else, you will need to provide a service that accepts `GET` requests. The response must not be deeper than one level (if it is nested, use `nested_field` explained below).
 
 A hot tip is to use a basic service like [Mockachino](https://www.mockachino.com/) to serve them, at least as a start. An object that matches the defaults would look like:
 
