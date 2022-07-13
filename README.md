@@ -1,6 +1,6 @@
 # `license-compliance` GitHub Action
 
-**License compliance for Node application made ultra easy. Provide it a string of licenses or fetch licenses dynamically from an online source.**
+**License compliance for Node applications made ultra easy. Provide it a string of licenses or fetch licenses dynamically from an online source.**
 
 Uses [license-compliance](https://www.npmjs.com/package/license-compliance) to check if open source packages you are using for production builds have allowed licenses.
 
