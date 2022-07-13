@@ -62,3 +62,9 @@ jobs:
           allow_licenses: "https://www.mockachino.com/{{YOUR_RANDOM_STRING}}/licenses"
           nested_field: "licenseString"
 ```
+
+## Testing and development
+
+To test it locally while developing you will perhaps need to have some non-compliant packages to ensure the script breaks at the right time. Assuming you are not allowing AGPL you can install for example (random package here) `npm install eplengine -S`.
+
+Then to start the test script run `sh test.sh`.

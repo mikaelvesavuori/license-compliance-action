@@ -2,6 +2,10 @@
 
 set -o pipefail
 
+ORANGE='\033[0;33m'
+NC='\033[0m'
+echo "${ORANGE}NOTE: Since this scans package.json, the action will NOT RUN unless you have package.json present in your root folder.\n${NC}"
+
 RANDOM_STRING="dba902ac-2531-41" # Random bit from Mockachino
 
 # Testing default settings
