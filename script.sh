@@ -11,19 +11,15 @@
 
 set -o pipefail
 
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-NC='\033[0m'
-
 # Set user inputs
 LICENSES="$1"
-echo "LICENSES is: ${BLUE}$LICENSES${NC}"
+echo "LICENSES is: $LICENSES"
 
 NESTED_FIELD="$2"
-echo "NESTED_FIELD is: ${BLUE}$NESTED_FIELD${NC}"
+echo "NESTED_FIELD is: $NESTED_FIELD"
 
 EXCLUDE_PATTERN="$3"
-echo "EXCLUDE_PATTERN is: ${BLUE}$EXCLUDE_PATTERN${NC}"
+echo "EXCLUDE_PATTERN is: $EXCLUDE_PATTERN"
 
 # This value will contain the final license string
 LICENSE_STRING="$LICENSES"
@@ -38,7 +34,7 @@ main() {
 }
 
 installNodeDependencies() {
-  echo "${GREEN}Installing dependencies...${NC}\n"
+  echo "Installing dependencies...\n"
   npm install license-compliance -D
 }
 
@@ -46,11 +42,11 @@ getLicenseStringFromUrl() {
   # Thanks to contributors at https://stackoverflow.com/questions/3183444/check-for-valid-link-url for ideas.
   REGEX='(https)://'
   if [[ $LICENSES =~ $REGEX ]]; then
-    echo "${GREEN}Getting license string from provided URL: ${BLUE}$LICENSES${NC}"
+    echo "Getting license string from provided URL: $LICENSES"
     LICENSE_RESPONSE=$(curl -X GET "$LICENSES" --silent)
     if [[ $NESTED_FIELD ]]; then
       LICENSE_STRING=$(echo "$LICENSE_RESPONSE" | jq ".$NESTED_FIELD" -r)
-      echo "${GREEN}Licenses picked up: ${BLUE}$LICENSE_STRING${NC}"
+      echo "Licenses picked up: $LICENSE_STRING"
     else
       LICENSE_STRING=$(echo "$LICENSE_RESPONSE" | jq "." -r)
     fi
@@ -58,12 +54,12 @@ getLicenseStringFromUrl() {
 }
 
 runLicenseComplianceSummary() {
-  echo "${GREEN}Summary of all licenses:${NC}"
+  echo "Summary of all licenses:"
   npx license-compliance
 }
 
 runLicenseCompliance() {
-  echo "${GREEN}Checking compliance:${NC}"
+  echo "Checking compliance:"
   npx license-compliance --production --allow "$LICENSE_STRING" --exclude "$EXCLUDE_PATTERN"
 
   echo "" # Just create some extra space
