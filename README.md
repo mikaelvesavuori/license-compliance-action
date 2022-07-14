@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: License compliance check
-        uses: mikaelvesavuori/license-compliance-action@v1.0.0
+        uses: mikaelvesavuori/license-compliance-action@v1.0.1
 ```
 
 If you want a more dynamic setup with the allowed licenses residing somewhere else, then you can do:
@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: License compliance check
-        uses: mikaelvesavuori/license-compliance-action@v1.0.0
+        uses: mikaelvesavuori/license-compliance-action@v1.0.1
         with:
           allow_licenses: "https://www.mockachino.com/{{YOUR_RANDOM_STRING}}/licenses"
           nested_field: "licenseString"
