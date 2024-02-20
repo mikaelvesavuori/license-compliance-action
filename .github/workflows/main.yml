@@ -6,10 +6,10 @@ jobs:
     steps:
       # Run private
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: License compliance check
         uses: ./
         with:
-          allow_licenses: 'https://www.mockachino.com/dba902ac-2531-41/licenses'
-          nested_field: 'licenseString'
-          exclude_pattern: ''
+          allow_licenses: "https://www.mockachino.com/dba902ac-2531-41/licenses"
+          nested_field: "licenseString"
+          exclude_pattern: ""

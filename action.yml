@@ -19,5 +19,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: ${GITHUB_ACTION_PATH}/script.sh "${{ inputs.allow_licenses }}" "${{ inputs.nested_field }}" "${{ inputs.exclude_pattern }}"
+    - run: echo "GITHUB_ACTION_PATH - $GITHUB_ACTION_PATH"
+    - run: echo "github.action_path - ${{ github.action_path }}"
+    - run: $GITHUB_ACTION_PATH/script.sh "${{ inputs.allow_licenses }}" "${{ inputs.nested_field }}" "${{ inputs.exclude_pattern }}"
       shell: bash
