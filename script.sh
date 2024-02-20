@@ -62,7 +62,9 @@ runLicenseCompliance() {
   echo "Checking compliance:"
   npx license-compliance --production --allow "$LICENSE_STRING" --exclude "$EXCLUDE_PATTERN"
 
-  echo "" # Just create some extra space
+  echo ""
+  echo "License scan complete!"
+  echo ""
 
   EXIT_CODE=$(echo $?)
   exit $EXIT_CODE
