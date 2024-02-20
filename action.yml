@@ -17,7 +17,7 @@ inputs:
     default: ''
     required: false
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - run: ${{ github.action_path }}/script.sh "${{ inputs.allow_licenses }}" "${{ inputs.nested_field }}" "${{ inputs.exclude_pattern }}"
+    - run: ${GITHUB_ACTION_PATH}/script.sh "${{ inputs.allow_licenses }}" "${{ inputs.nested_field }}" "${{ inputs.exclude_pattern }}"
       shell: bash
