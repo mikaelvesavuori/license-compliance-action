@@ -9,7 +9,7 @@
 # to help check licenses of production dependencies during CI.
 #
 
-set -o pipefail
+set -eo pipefail
 
 # Set user inputs
 LICENSES="$1"
@@ -60,14 +60,17 @@ runLicenseComplianceSummary() {
 
 runLicenseCompliance() {
   echo "Checking compliance:"
-  npx license-compliance --production --allow "$LICENSE_STRING" --exclude "$EXCLUDE_PATTERN"
-
-  echo ""
-  echo "License scan complete!"
-  echo ""
-
-  EXIT_CODE=$(echo $?)
-  exit $EXIT_CODE
+  if npx license-compliance --production --allow "$LICENSE_STRING" --exclude "$EXCLUDE_PATTERN"; then
+    echo ""
+    echo "License scan complete!"
+    echo ""
+  else
+    EXIT_CODE=$?
+    echo ""
+    echo "License scan failed! Non-compliant packages found."
+    echo ""
+    exit "$EXIT_CODE"
+  fi
 }
 
 main "$@"
