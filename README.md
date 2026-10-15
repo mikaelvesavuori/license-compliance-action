@@ -32,6 +32,10 @@ If pointing the `allow_licenses` input to an URL, use this to indicate whether t
 
 An exclusion pattern, such as `/^@the-project/;some-package`.
 
+### `direct`
+
+If `true`, check only direct (depth-1) production dependencies instead of the full transitive tree. Defaults to `false`.
+
 ## Example of how to use this action in a workflow
 
 Minimal use-case where you want to just get going with the defaults:
@@ -61,6 +65,21 @@ jobs:
         with:
           allow_licenses: "https://www.mockachino.com/{{YOUR_RANDOM_STRING}}/licenses"
           nested_field: "licenseString"
+```
+
+To check only direct production dependencies, set `direct` to `true`:
+
+```yml
+on: [push]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: License compliance check
+        uses: mikaelvesavuori/license-compliance-action@v1
+        with:
+          direct: true
 ```
 
 ## Testing and development
