@@ -21,8 +21,26 @@ echo "NESTED_FIELD is: $NESTED_FIELD"
 EXCLUDE_PATTERN="$3"
 echo "EXCLUDE_PATTERN is: $EXCLUDE_PATTERN"
 
+DIRECT="$4"
+echo "DIRECT is: $DIRECT"
+
 # This value will contain the final license string
 LICENSE_STRING="$LICENSES"
+
+# Allow empty value (script invoked directly) and validate
+if [ -z "$DIRECT" ]; then
+  DIRECT='false'
+fi
+case "$DIRECT" in
+  true|false) ;;
+  *) echo "direct must be true or false"; exit 1;;
+esac
+
+# Shared dependency arguments used by both the summary and enforcement runs
+DEPENDENCY_ARGS=(--production)
+if [ "$DIRECT" = "true" ]; then
+  DEPENDENCY_ARGS+=(--direct)
+fi
 
 main() {
   if [ -f "package.json" ]; then
@@ -55,12 +73,12 @@ getLicenseStringFromUrl() {
 
 runLicenseComplianceSummary() {
   echo "Summary of all licenses:"
-  npx license-compliance
+  npx license-compliance "${DEPENDENCY_ARGS[@]}"
 }
 
 runLicenseCompliance() {
   echo "Checking compliance:"
-  if npx license-compliance --production --allow "$LICENSE_STRING" --exclude "$EXCLUDE_PATTERN"; then
+  if npx license-compliance "${DEPENDENCY_ARGS[@]}" --allow "$LICENSE_STRING" --exclude "$EXCLUDE_PATTERN"; then
     echo ""
     echo "License scan complete!"
     echo ""

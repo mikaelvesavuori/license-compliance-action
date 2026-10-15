@@ -16,8 +16,12 @@ inputs:
     description: 'An exclusion pattern, such as "/^@the-project/;some-package".'
     default: ''
     required: false
+  direct:
+    description: 'If true, check only direct (depth-1) production dependencies instead of the full transitive tree.'
+    default: 'false'
+    required: false
 runs:
   using: 'composite'
   steps:
-    - run: $GITHUB_ACTION_PATH/script.sh "${{ inputs.allow_licenses }}" "${{ inputs.nested_field }}" "${{ inputs.exclude_pattern }}"
+    - run: $GITHUB_ACTION_PATH/script.sh "${{ inputs.allow_licenses }}" "${{ inputs.nested_field }}" "${{ inputs.exclude_pattern }}" "${{ inputs.direct }}"
       shell: bash
